@@ -13,8 +13,8 @@
 
 <body>
     <div class="container mt-4">
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('articles.index') }}">Articles</a>
+        <a href="{{ route('home') }}">Главная</a>
+        <a href="{{ route('articles.index') }}">Статьи</a>
         <a href="{{ route('about') }}">О нас</a>
         <h1>@yield('header')</h1>
         <div>

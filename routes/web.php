@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Article;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('about', function () {
-    return view('about');
-})->name('about');
+Route::get('about', [ArticleController::class, 'about'])->name('about');
 
-Route::get('articles', function () {
-    $articles = Article::all();
-    return view('article', ['articles' => $articles]);
-})->name('articles.index');
+Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
