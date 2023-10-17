@@ -16,6 +16,13 @@
         <a href="{{ route('home') }}">Главная</a>
         <a href="{{ route('articles.index') }}">Статьи</a>
         <a href="{{ route('about') }}">О нас</a>
+        <a href="{{ route ('articles.create') }}">Создать статью</a>
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif
+
         <h1>@yield('header')</h1>
         <div>
             @yield('content')
