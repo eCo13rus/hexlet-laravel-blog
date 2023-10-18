@@ -28,3 +28,9 @@ Route::get('articles/create', [ArticleController::class, 'create'])->name('artic
 Route::post('articles', [ArticleController::class, 'store'])->name('articles.store');
 
 Route::get('articles/{id}', [ArticleController::class , 'show'])->name('articles.show');
+
+Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+
+Route::patch('articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+
+Route::delete('articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');

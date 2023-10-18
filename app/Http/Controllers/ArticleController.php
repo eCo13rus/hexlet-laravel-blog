@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -33,12 +33,9 @@ class ArticleController extends Controller
         return view('article.create', compact('article'));
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest  $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:articles',
-            'body' => 'required|min:10',
-        ]);
+        $data = $request->validated();
 
         $article = new Article();
         $article->fill($data);
@@ -47,5 +44,35 @@ class ArticleController extends Controller
         Session::flash('status', 'Статья успешно создана!');
 
         return redirect()->route('articles.index');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    public function update(ArticleRequest $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $data = $request->validate();
+
+        $article->fill($data);
+        $article->save();
+
+        Session::flash('status', 'Статья успешно обновлена!');
+
+        return redirect()
+            ->route('articles.index');
+    }
+
+    public function destroy(int $id)
+    {
+        $article = Article::find($id);
+        if ($article) {
+            $article->delete();
+        }
+
+        return redirect()->route('articles.index')->with('message', 'Статья удалена');
     }
 }
