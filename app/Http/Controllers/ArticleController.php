@@ -2,29 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
     public function index()
     {
         $articles = Article::paginate();
-
         return view('article.index', compact('articles'));
-    }
-
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-
-        return view('article.show', compact('article'));
     }
 
     public function create()
@@ -33,7 +20,7 @@ class ArticleController extends Controller
         return view('article.create', compact('article'));
     }
 
-    public function store(ArticleRequest  $request)
+    public function store(ArticleRequest $request)
     {
         $data = $request->validated();
 
@@ -46,33 +33,47 @@ class ArticleController extends Controller
         return redirect()->route('articles.index');
     }
 
-    public function edit($id)
+    public function show(string $article)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::findOrFail($article);
+        return view('article.show', compact('article'));
+    }
+
+    public function edit(string $article)
+    {
+        $article = Article::findOrFail($article);
         return view('article.edit', compact('article'));
     }
 
-    public function update(ArticleRequest $request, $id)
+    public function update(ArticleRequest $request, string $article)
     {
-        $article = Article::findOrFail($id);
-        $data = $request->validate();
 
+        $article = Article::findOrFail($article);
+        
+        $data = $request->validated();
         $article->fill($data);
-        $article->save();
 
-        Session::flash('status', 'Статья успешно обновлена!');
+        Session::flash('status', 'Статья успешно обновлена');
 
-        return redirect()
-            ->route('articles.index');
+        return redirect()->route('articles.index');
     }
 
-    public function destroy(int $id)
+
+    public function destroy(string $id)
     {
         $article = Article::find($id);
+
         if ($article) {
             $article->delete();
         }
 
-        return redirect()->route('articles.index')->with('message', 'Статья удалена');
+        Session::flash('status', 'Статья успешно удалена!');
+
+        return redirect()->route('articles.index');
+    }
+
+    public function about()
+    {
+        return view('about');
     }
 }

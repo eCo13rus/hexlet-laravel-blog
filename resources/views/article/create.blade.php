@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'мой блог')
+
 @section('content')
 @if ($errors->any())
 <div>

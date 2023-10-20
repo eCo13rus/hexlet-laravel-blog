@@ -21,7 +21,7 @@ class ArticleRequest extends FormRequest
      */
     public function rules(): array
     {
-        $articleId = $this->route('id') ?? 'NULL';
+        $articleId = $this->route('article') ?? 'NULL';
         return [
             'name' => "required|unique:articles,name,$articleId",
             'body' => 'required|min:10',
