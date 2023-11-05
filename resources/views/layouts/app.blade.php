@@ -15,18 +15,20 @@
 
 <body>
     <div class="container mt-4">
-        <a href="{{ route ('articles.index') }}">Главная</a>
-        <a href="{{ route ('articles.index') }}">Статьи</a>
-        <a href="{{ route ('about') }}">О нас</a>
-        <a href="{{ route ('articles.create') }}">Создать статью</a>
+        <div class="text-center mb-3">
+            <a href="{{ route ('articles.index') }}">Главная</a>
+            <a href="{{ route ('articles.index') }}">Статьи</a>
+            <a href="{{ route ('about') }}">О нас</a>
+            <a href="{{ route ('articles.create') }}">Создать статью</a>
+        </div>
         @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
         @endif
 
-        <h1>@yield('header')</h1>
-        <div>
+        <h1 class="text-center">@yield('header')</h1>
+        <div class="text-center">
             @yield('content')
         </div>
     </div>
