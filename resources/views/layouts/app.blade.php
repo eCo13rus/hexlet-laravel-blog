@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hexlet Blog - @yield('title')</title>
+    <title>Hexlet Blog @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -16,10 +16,11 @@
 <body>
     <div class="container mt-4">
         <div class="text-center mb-3">
-            <a href="{{ route ('articles.index') }}">Главная</a>
+            <a href="{{ route ('home') }}">Главная</a>
             <a href="{{ route ('articles.index') }}">Статьи</a>
             <a href="{{ route ('about') }}">О нас</a>
             <a href="{{ route ('articles.create') }}">Создать статью</a>
+            <title>Мой блог</title>
         </div>
         @if (session('status'))
         <div class="alert alert-success">

@@ -16,7 +16,7 @@ use App\Http\Controllers\ArticleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 })->name('home');
 
 Route::get('about', [ArticleController::class, 'about'])->name('about');
